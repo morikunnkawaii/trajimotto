@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts
   resources :users, only: [:new, :create], path_names: {new: "sign_up"}
   resource :session
   resources :passwords, param: :token
