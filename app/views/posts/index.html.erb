@@ -3,7 +3,7 @@
     <%= link_to post_path(post.id) do %>
       <%= image_tag post.get_image(400,400) %>
     <% end %>
-    <p>投稿画像 <%= image_tag 'sample-author1.jpg' %></p>
+    <p>投稿画像：<%= image_tag post.user.get_profile_image(100,100) %></p>
     <p>タイトル <%= post.title %></p>
     <p>コメント <%= post.body %></p>
     <p>ユーザー <%= post.user.name %></p>
