@@ -1,7 +1,7 @@
 <% @posts.each do |post| %>
   <div>
     <%= link_to post_path(post.id) do %>
-      <%= image_tag post.get_image %>
+      <%= image_tag post.get_image(400,400) %>
     <% end %>
     <p>投稿画像 <%= image_tag 'sample-author1.jpg' %></p>
     <p>タイトル <%= post.title %></p>

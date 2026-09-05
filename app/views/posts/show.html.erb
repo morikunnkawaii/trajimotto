@@ -1,5 +1,5 @@
 <div>
-  <%= image_tag @post.get_image %>
+  <%= image_tag @post.get_image(400,400) %>
   <p>タイトル：<%= @post.title %></p>
   <p>コメント：<%= @post.body %></p>
   <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
