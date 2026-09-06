@@ -4,13 +4,18 @@ class UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
 
   def new
-    @user = User.new
+    if authenticated?
+      redirect_to user_path(Current.user)
+    else
+      @user = User.new
+    end
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to new_session_path
+      start_new_session_for(@user)
+      redirect_to user_path(@user)
     else
       render :new, status: :unprocessable_entity
     end
