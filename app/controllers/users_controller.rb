@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to new_session_path, notice: "ユーザー登録が完了しました！"
+      redirect_to new_session_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,6 +32,12 @@ class UsersController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    redirect_to new_user_path
   end
 
   private
