@@ -7,7 +7,11 @@
     <p>コメント <%= post.body %></p>
     <table>
       <tr>
-        <td><%= image_tag post.user.get_profile_image(80,80) %></td>
+        <td>
+          <%= link_to user_path(post.user_id) do %>
+            <%= image_tag post.user.get_profile_image(80,80) %>
+          <% end %>
+        </td>
         <td>ユーザー名 <%= post.user.name %></td>
       </tr>
     </table>
