@@ -37,6 +37,9 @@
           <%= link_to "投稿一覧", posts_path %>
         </li>
         <li>
+          <%= link_to "ユーザー一覧",users_path %>
+        </li>
+        <li>
           <%= link_to "ご利用方法", about_path %>
         </li>
         <li>
@@ -56,12 +59,6 @@
     </header>
     <main>
       <p><%= flash[:notice] %></p>
-      <% if authenticated? %>
-        <%= form_with url: posts_path, method: :get do |f| %>
-          <%= f.text_field :title %>
-          <%= f.submit "検索" %>
-        <% end %>
-      <% end %>
       <%= yield %>
     </main>
     <footer>

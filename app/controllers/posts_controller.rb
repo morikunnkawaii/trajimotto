@@ -17,11 +17,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    if params[:title].present?
-      @posts = Post.where("title LIKE ?", "%#{params[:title]}%")
-    else
-      @posts = Post.all
-    end
+    @posts = Post.all
   end
 
   def show
