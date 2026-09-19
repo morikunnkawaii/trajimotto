@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get "searches/index", to:"searches#index", as:"searches"
-  resources :posts
+  resources :posts do
+    resources :post_comments, only: [:create]
+  end
   resources :users, only: [:new, :create, :index, :show, :edit, :update, :destroy], path_names: {new: "sign_up"}
   resource :session
   resources :passwords, param: :token
