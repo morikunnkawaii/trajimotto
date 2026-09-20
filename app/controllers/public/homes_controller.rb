@@ -1,4 +1,4 @@
-class HomesController < ApplicationController
+class Public::HomesController < Public::ApplicationController
   
   allow_unauthenticated_access
 

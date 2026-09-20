@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Public::UsersController < Public::ApplicationController
 
   allow_unauthenticated_access only: [:new, :create]
   before_action :is_matching_login_user, only: [:edit, :update]

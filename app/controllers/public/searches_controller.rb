@@ -1,4 +1,4 @@
-class SearchesController < ApplicationController
+class Public::SearchesController < Public::ApplicationController
   def index
     @query = params[:query]
     @target = params[:target]
