@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   #管理者
   namespace :admin do
     resource :session, only: [:new, :create, :destroy]
-    get 'dashboards', to: 'dashboards#index'
+    resources :dashboards 
     resources :users, only: [:destroy]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
