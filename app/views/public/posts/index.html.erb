@@ -1,31 +1,38 @@
-<% if authenticated? %>
-  <%= form_with url: searches_path, method: :get do |f| %>
-    <%= f.text_field :query, value: params[:query] %> 
-    <!-- value: params[:query]これをすることによって検索した後の記述が残る -->
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <% if authenticated? %>
+        <%= form_with url: searches_path, method: :get do |f| %>
+          <%= f.text_field :query, value: params[:query] %> 
+          <!-- value: params[:query]これをすることによって検索した後の記述が残る -->
 
-    <%= select_tag :target, options_for_select([["ユーザー", "user"], ["投稿", "post"]], selected: params[:target]) %>
-    <!-- select_tagでタグを作成。options_for_selectによりユーザーと投稿が表示。ユーザーを選ぶとuserが送られ、投稿を選ぶとpostが送られる。selectedは上のvalueのselectバージョン -->
-            
-    <%= f.submit "検索" %>
-  <% end %>
-<% end %>
-<% @posts.each do |post| %>
-  <div>
-    <p>タイトル <%= post.title %></p>
-    <%= link_to post_path(post.id) do %>
-      <%= image_tag post.get_image(400,400) %>
-    <% end %>
-    <p>コメント <%= post.body %></p>
-    <table>
-      <tr>
-        <td>
-          <%= link_to user_path(post.user_id) do %>
-            <%= image_tag post.user.get_profile_image(80,80) %>
+          <%= select_tag :target, options_for_select([["ユーザー", "user"], ["投稿", "post"]], selected: params[:target]) %>
+          <!-- select_tagでタグを作成。options_for_selectによりユーザーと投稿が表示。ユーザーを選ぶとuserが送られ、投稿を選ぶとpostが送られる。selectedは上のvalueのselectバージョン -->
+                  
+          <%= f.submit "検索" %>
+        <% end %>
+      <% end %>
+      <% @posts.each do |post| %>
+        <div>
+          <p class="title"><%= post.title %></p>
+          <%= link_to post_path(post.id) do %>
+            <%= image_tag post.get_image(400,400) %>
           <% end %>
-        </td>
-        <td>ユーザー名 <%= post.user.name %></td>
-      </tr>
-    </table>
-    <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></p>
+          <p class="body"><%= post.body %></p>
+          <table class="table w-auto mx-auto">
+            <tr>
+              <td>
+                <%= link_to user_path(post.user_id) do %>
+                  <%= image_tag post.user.get_profile_image(80,80) %>
+                <% end %>
+              </td>
+              <td class="align-middle"><%= post.user.name %></td>
+            </tr>
+          </table>
+          <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id), class: "btn btn-secondary " %></p>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>
+  

@@ -1,33 +1,47 @@
-<div>
-  <p>タイトル：<%= @post.title %></p>
-  <%= image_tag @post.get_image(400,400) %>
-  <p>コメント：<%= @post.body %></p>
-  <p>
-    <%= link_to user_path(@user) do %>
-      <%= image_tag @post.user.get_profile_image(100,100) %>
-    <% end %>
-  </p>
-  <p>投稿者：<%= @post.user.name %></p>
-  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @post.user == Current.user %>
-    <%= link_to "投稿を削除", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
-    <%= link_to "投稿の編集", edit_post_path(@post) %>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <p>タイトル：<%= @post.title %></p>
+      <%= image_tag @post.get_image(400,400) %>
+      <p>コメント：<%= @post.body %></p>
+      <p>
+        <%= link_to user_path(@user) do %>
+          <%= image_tag @post.user.get_profile_image(100,100) %>
+        <% end %>
+      </p>
+      <p>投稿者：<%= @post.user.name %></p>
+      <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+      <% if @post.user == Current.user %>
+        <%= link_to "投稿を削除", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger"  %>
+        <%= link_to "投稿の編集", edit_post_path(@post), class: "btn btn-info text-white" %>
+      <% end %>
+    </div>
+  </div>
 </div>
-<div>
-  <p>コメント件数：<%= @post.post_comments.count %></p>
-  <% @post.post_comments.each do |post_comment| %>
-    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-    <%= post_comment.user.name %>
-    <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-    <% if post_comment.user == Current.user %>
-      <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
-    <% end %>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <p>コメント件数：<%= @post.post_comments.count %></p>
+      <% @post.post_comments.each do |post_comment| %>
+        <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+        <%= post_comment.user.name %>
+        <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+        <% if post_comment.user == Current.user %>
+          <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
-<div>
-  <%= form_with model: [@post, @post_comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントしよう" %>
-    <%= f.submit "送信する" %>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= form_with model: [@post, @post_comment] do |f| %>
+        <div class="field">
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントしよう", class: "form-control" %>
+        </div>
+        <%= f.submit "送信する" %>
+      <% end %>
+    </div>
+  </div>
 </div>
