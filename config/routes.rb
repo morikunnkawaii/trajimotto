@@ -1,14 +1,24 @@
 Rails.application.routes.draw do
-  get "searches/index", to:"searches#index", as:"searches"
-  resources :posts do
-    resources :post_comments, only: [:create, :destroy]
+  #エンドユーザー
+  scope module: :public do
+    get "searches/index", to:"searches#index", as:"searches"
+    resources :posts do
+      resources :post_comments, only: [:create, :destroy]
+    end
+    resources :users, only: [:new, :create, :index, :show, :edit, :update, :destroy], path_names: {new: "sign_up"}
+    resource :session
+    resources :passwords, param: :token
+    root to: "homes#top" 
+    get "homes/about", to:"homes#about", as:"about"
   end
-  resources :users, only: [:new, :create, :index, :show, :edit, :update, :destroy], path_names: {new: "sign_up"}
-  resource :session
-  resources :passwords, param: :token
-  root to: "homes#top" 
-  get "homes/about", to:"homes#about", as:"about"
   post "guest_sign_in", to: "guest_sessions#create", as: :guest_sign_in
+
+  #管理者
+  namespace :admin do
+    resource :session, only: [:new, :create, :destroy]
+    resources :dashboards 
+    resources :users, only: [:destroy]
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
