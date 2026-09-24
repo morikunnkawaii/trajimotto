@@ -9,22 +9,9 @@
     <%= f.submit "検索" %>
   <% end %>
 <% end %>
-<% @posts.each do |post| %>
-  <div>
-    <p>タイトル <%= post.title %></p>
-    <%= link_to post_path(post.id) do %>
-      <%= image_tag post.get_image(400,400) %>
-    <% end %>
-    <p>コメント <%= post.body %></p>
-    <table>
-      <tr>
-        <td>
-          <%= link_to user_path(post.user_id) do %>
-            <%= image_tag post.user.get_profile_image(80,80) %>
-          <% end %>
-        </td>
-        <td>ユーザー名 <%= post.user.name %></td>
-      </tr>
-    </table>
-  </div>
+<% @users.each do |user| %>
+  <p><%= user.name %></p>
+  <%= link_to user_path(user.id) do %>
+    <%= image_tag user.get_profile_image(100,100) %>
+  <% end %>
 <% end %>

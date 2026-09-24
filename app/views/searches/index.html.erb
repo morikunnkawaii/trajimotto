@@ -9,6 +9,18 @@
     <%= f.submit "検索" %>
   <% end %>
 <% end %>
+
+<% if @message %>
+  <p><%= @message %></p>
+<% end %>
+
+<% @users.each do |user| %>
+  <p><%= user.name %></p>
+  <%= link_to user_path(user.id) do %>
+    <%= image_tag user.get_profile_image(100,100) %>
+  <% end %>
+<% end %>
+
 <% @posts.each do |post| %>
   <div>
     <p>タイトル <%= post.title %></p>
@@ -28,3 +40,4 @@
     </table>
   </div>
 <% end %>
+<% @No_hits %>

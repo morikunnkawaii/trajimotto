@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  get "searches/index", to:"searches#index", as:"searches"
   resources :posts
-  resources :users, only: [:new, :create, :show, :edit, :update, :destroy], path_names: {new: "sign_up"}
+  resources :users, only: [:new, :create, :index, :show, :edit, :update, :destroy], path_names: {new: "sign_up"}
   resource :session
   resources :passwords, param: :token
   root to: "homes#top" 
