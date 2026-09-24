@@ -1,43 +1,48 @@
-<% if authenticated? %>
-  <%= form_with url: searches_path, method: :get do |f| %>
-    <%= f.text_field :query, value: params[:query] %> 
-    <!-- value: params[:query]これをすることによって検索した後の記述が残る -->
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <% if authenticated? %>
+        <%= form_with url: searches_path, method: :get do |f| %>
+          <%= f.text_field :query, value: params[:query] %> 
+          <!-- value: params[:query]これをすることによって検索した後の記述が残る -->
 
-    <%= select_tag :target, options_for_select([["ユーザー", "user"], ["投稿", "post"]], selected: params[:target]) %>
-    <!-- select_tagでタグを作成。options_for_selectによりユーザーと投稿が表示。ユーザーを選ぶとuserが送られ、投稿を選ぶとpostが送られる。selectedは上のvalueのselectバージョン -->
-            
-    <%= f.submit "検索" %>
-  <% end %>
-<% end %>
+          <%= select_tag :target, options_for_select([["ユーザー", "user"], ["投稿", "post"]], selected: params[:target]) %>
+          <!-- select_tagでタグを作成。options_for_selectによりユーザーと投稿が表示。ユーザーを選ぶとuserが送られ、投稿を選ぶとpostが送られる。selectedは上のvalueのselectバージョン -->
+                  
+          <%= f.submit "検索" %>
+        <% end %>
+      <% end %>
 
-<% if @message %>
-  <p><%= @message %></p>
-<% end %>
+      <% if @message %>
+        <p><%= @message %></p>
+      <% end %>
 
-<% @users.each do |user| %>
-  <p><%= user.name %></p>
-  <%= link_to user_path(user.id) do %>
-    <%= image_tag user.get_profile_image(100,100) %>
-  <% end %>
-<% end %>
+      <% @users.each do |user| %>
+        <p><%= user.name %></p>
+        <%= link_to user_path(user.id) do %>
+          <%= image_tag user.get_profile_image(100,100) %>
+        <% end %>
+      <% end %>
 
-<% @posts.each do |post| %>
-  <div>
-    <p>タイトル <%= post.title %></p>
-    <%= link_to post_path(post.id) do %>
-      <%= image_tag post.get_image(400,400) %>
-    <% end %>
-    <p>コメント <%= post.body %></p>
-    <table>
-      <tr>
-        <td>
-          <%= link_to user_path(post.user_id) do %>
-            <%= image_tag post.user.get_profile_image(80,80) %>
+      <% @posts.each do |post| %>
+        <div class="field">
+          <p><%= post.title %></p>
+          <%= link_to post_path(post.id) do %>
+            <%= image_tag post.get_image(400,400) %>
           <% end %>
-        </td>
-        <td>ユーザー名 <%= post.user.name %></td>
-      </tr>
-    </table>
+          <p><%= post.body %></p>
+          <table>
+            <tr>
+              <td>
+                <%= link_to user_path(post.user_id) do %>
+                  <%= image_tag post.user.get_profile_image(80,80) %>
+                <% end %>
+              </td>
+              <td><%= post.user.name %></td>
+            </tr>
+          </table>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
-<% @No_hits %>
+</div>
