@@ -5,4 +5,4 @@ class GuestSessionsController < ApplicationController
     start_new_session_for(user)
     redirect_to root_path, notice: "guestuserでログインしました。"
   end
-end
+end 
