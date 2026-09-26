@@ -31,8 +31,8 @@
           </table>
           <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id), class: "btn btn-secondary" %></p>
         </div>
+        <%= render 'favorite', post: post %>
       <% end %>
     </div>
   </div>
 </div>
-  

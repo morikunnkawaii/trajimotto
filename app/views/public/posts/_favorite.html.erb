@@ -1,0 +1,17 @@
+<% if post.user != Current.user %>
+  <% if post.favorited_by?(Current.user) %>
+    <p>
+      <%= link_to post_favorite_path(post), data: { turbo_method: :delete } do %>
+        ♥<%= post.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_favorite_path(post), data: { turbo_method: "post" } do %>
+        ♡<%= post.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+<% else %>
+  <p>♥<%= post.favorites.count %> いいね</p>
+<% end %>
