@@ -12,6 +12,11 @@ class Public::FavoritesController < Public::ApplicationController
     favorite.destroy
     redirect_back(fallback_location: root_path)
   end
+
+  def index
+    @favorites = Current.user.favorites.includes(:post)
+  end
+
 end
 
 #redirect_backは直前のページに戻してくれる

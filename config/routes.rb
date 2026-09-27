@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :passwords, param: :token
     root to: "homes#top" 
     get "homes/about", to:"homes#about", as:"about"
+    get "favorites/index", to:"favorites#index", as:"favorites"
   end
   post "guest_sign_in", to: "guest_sessions#create", as: :guest_sign_in
 
