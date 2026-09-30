@@ -6,7 +6,12 @@ Rails.application.routes.draw do
       resource :favorite, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
-    resources :users, only: [:new, :create, :index, :show, :edit, :update, :destroy], path_names: {new: "sign_up"}
+    resources :users, only: [:new, :create, :index, :show, :edit, :update, :destroy], path_names: {new: "sign_up"} do
+      member do
+        get :following, :followers
+      end
+    end
+    resources :relationships, only: [:create, :destroy]
     resource :session
     resources :passwords, param: :token
     root to: "homes#top" 
