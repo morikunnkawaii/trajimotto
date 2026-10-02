@@ -17,7 +17,7 @@ class Public::PostsController < Public::ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.min_favorites(params[:min_favorites])
   end
 
   def show

@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
 
+  scope :min_favorites, ->(count) {where("favorites_count >= ?", count.to_i) if count.present? && count.to_i > 0}
+
   validates :title, presence: true
   validates :body, presence: true
   validates :image, presence: true

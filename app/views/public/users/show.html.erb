@@ -6,6 +6,7 @@
       <% if @user == Current.user %>
         <p class="field"><%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-outline-primary btn-sm" %></p>
       <% end %>
+      <%= render "public/users/follow_button", user: @user %>
     </div>
   </div>
 </div>

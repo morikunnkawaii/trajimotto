@@ -1,0 +1,9 @@
+<% @users.each do |user| %>
+  <%= user.name %>
+  <%= link_to user_path(user.id) do %>
+    <%= image_tag user.get_profile_image(100,100) %>
+  <% end %>
+  <p>フォロワー数：<%= user.followers.count %></p>
+  <p>フォロー数：<%= user.following.count %></p>
+  <%= render "public/users/follow_button", user: user %>
+<% end %>

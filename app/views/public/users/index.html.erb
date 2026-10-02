@@ -14,4 +14,15 @@
   <%= link_to user_path(user.id) do %>
     <%= image_tag user.get_profile_image(100,100) %>
   <% end %>
+  <p>
+    <%= link_to followers_user_path(user.id) do %>
+      フォロワー数：<%= user.followers.size %>
+    <% end %>
+  </p>
+  <p>
+    <%= link_to following_user_path(user.id) do %>
+      フォロー数：<%= user.following.size %>
+    <% end %>
+  </p>
+  <%= render "public/users/follow_button", user: user %>
 <% end %>

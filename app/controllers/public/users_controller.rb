@@ -49,6 +49,16 @@ class Public::UsersController < Public::ApplicationController
     redirect_to new_user_path
   end
 
+  def following
+    @user = User.find(params[:id])
+    @users = @user.following
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
+  end
+
   private
 
   def user_params
