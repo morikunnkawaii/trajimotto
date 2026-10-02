@@ -12,6 +12,14 @@
           <%= f.submit "検索" %>
         <% end %>
       <% end %>
+      <div class="mb-4 d-flex gap-2 align-items-center flex-wrap">
+        <span class="text-muted small fw-bold me-1">いいね数で絞り込み:</span>
+        <%= link_to "すべて", posts_path, class: "badge rounded-pill text-decoration-none #{params[:min_favorites].blank? ? 'bg-primary' : 'bg-light text-dark border'}" %>
+        <% [1, 2, 3, 4].each do |count| %>
+          <% active = params[:min_favorites] == count.to_s %>
+          <%= link_to "❤️ #{count}+", posts_path(min_favorites: count), class: "badge rounded-pill text-decoration-none #{active ? 'bg-danger text-white' : 'bg-light text-dark border'}" %>
+        <% end %>
+      </div>
       <% @posts.each do |post| %>
         <div>
           <p class="title"><%= post.title %></p>
