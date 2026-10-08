@@ -1,0 +1,5 @@
+<div class="container">
+  <div id="map" data-api-key="<%= ENV['Maps_API_Key'] %>"></div>
+</div>
+
+<%= javascript_include_tag 'map', 'data-turbo-track': 'reload' %>

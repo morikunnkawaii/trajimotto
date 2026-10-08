@@ -25,8 +25,17 @@
         <div class="field">
           <%= f.text_area :body, rows: 5, class: "form-control" %>
         </div>
+        <h6>郵便番号</h6>
+        <div class="field">
+          <%= text_field_tag :zipcode, nil, class: "form-control" %>
+        </div>
+        <h6>住所</h6>
+        <div class="field">
+          <%= f.text_field :address, class: "form-control" %>
+        </div>
         <%= f.submit '投稿', class: "btn btn-info text-white" %>
       <% end %>
     </div>
   </div>
 </div>
+<%= javascript_include_tag "jpostal", 'data-turbo-track': 'reload' %>
