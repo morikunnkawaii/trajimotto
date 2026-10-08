@@ -17,7 +17,14 @@ class Public::PostsController < Public::ApplicationController
   end
 
   def index
-    @posts = Post.min_favorites(params[:min_favorites])
+    respond_to do |format|
+      format.html do
+        @posts = Post.min_favorites(params[:min_favorites])
+      end
+      format.json do
+        @posts = Post.min_favorites(params[:min_favorites])
+      end
+    end
   end
 
   def show
