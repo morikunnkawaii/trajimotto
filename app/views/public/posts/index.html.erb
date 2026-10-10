@@ -8,10 +8,11 @@
 
           <%= select_tag :target, options_for_select([["ユーザー", "user"], ["投稿", "post"]], selected: params[:target]) %>
           <!-- select_tagでタグを作成。options_for_selectによりユーザーと投稿が表示。ユーザーを選ぶとuserが送られ、投稿を選ぶとpostが送られる。selectedは上のvalueのselectバージョン -->
-                  
+              
           <%= f.submit "検索" %>
         <% end %>
       <% end %>
+
       <div class="mb-4 d-flex gap-2 align-items-center flex-wrap">
         <span class="text-muted small fw-bold me-1">いいね数で絞り込み:</span>
         <%= link_to "すべて", posts_path, class: "badge rounded-pill text-decoration-none #{params[:min_favorites].blank? ? 'bg-primary' : 'bg-light text-dark border'}" %>
@@ -20,14 +21,21 @@
           <%= link_to "❤️ #{count}+", posts_path(min_favorites: count), class: "badge rounded-pill text-decoration-none #{active ? 'bg-danger text-white' : 'bg-light text-dark border'}" %>
         <% end %>
       </div>
+
+      <% if params[:tag].present? %>
+        <h2 class="mb-4">「<%= params[:tag] %>」の投稿一覧</h2>
+      <% end %>
+
+      <!-- ▼ 投稿のループは1つにまとめる ▼ -->
       <% @posts.each do |post| %>
-        <div>
+        <div class="mb-3 p-3">
           <p class="title"><%= post.title %></p>
           <%= link_to post_path(post.id) do %>
             <%= image_tag post.get_image(400,400) %>
           <% end %>
           <p class="body"><%= post.body %></p>
           <%= post.address %>
+          
           <table class="table w-auto mx-auto">
             <tr>
               <td>
@@ -38,28 +46,18 @@
               <td class="align-middle"><%= post.user.name %></td>
             </tr>
           </table>
+          
           <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id), class: "btn btn-secondary" %></p>
+          <%= render 'favorite', post: post %>
+          <!-- ▼ タグ一覧のバッジ表示をカードの中にスッキリ配置 ▼ -->
+          <div class="tags mt-2">
+            <% post.tag_list.each do |tag| %>
+              <%= link_to tag, posts_path(tag: tag), class: "badge bg-secondary text-decoration-none me-1" %>
+            <% end %>
+          </div>
         </div>
-        <%= render 'favorite', post: post %>
       <% end %>
+
     </div>
   </div>
 </div>
-
-<% if params[:tag].present? %>
-  <h2>「#<%= params[:tag] %>」の投稿一覧</h2>
-<% end %>
-
-<% @posts.each do |post| %>
-  <div class="card mb-3 p-3">
-    <%# ヘルパーを使って本文を表示（#ハッシュタグがリンク化される） %>
-    <p><%= render_with_hashtags(post.body) %></p>
-    
-    <%# 紐付いているタグ一覧をバッジ表示する場合 %>
-    <div class="tags">
-      <% post.tag_list.each do |tag| %>
-        <%= link_to "##{tag}", public_posts_path(name: tag), class: "badge bg-secondary text-decoration-none" %>
-      <% end %>
-    </div>
-  </div>
-<% end %>

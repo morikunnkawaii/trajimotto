@@ -33,6 +33,12 @@
         <div class="field">
           <%= f.text_field :address, id:"post_address", class: "form-control" %>
         </div>
+        <div class="field">
+          <%= f.label :tag_list, "タグ（カンマ「,」区切り）", class: "form-label" %>
+        </div>
+        <div class="field">
+          <%= f.text_field :tag_list, value: @post.tag_list.to_s, class: "form-control", placeholder: "例: 旅行, カフェ, 温泉" %>
+        </div>
         <%= f.submit '投稿', class: "btn btn-info text-white" %>
       <% end %>
     </div>
