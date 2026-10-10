@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :posts do
       resource :favorite, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
+      get 'tags/:tag', to: 'posts#index', as: :tag
     end
     resources :users, only: [:new, :create, :index, :show, :edit, :update, :destroy], path_names: {new: "sign_up"} do
       member do

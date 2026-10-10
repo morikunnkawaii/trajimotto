@@ -17,13 +17,13 @@ class Public::PostsController < Public::ApplicationController
   end
 
   def index
+    @posts = Post.all
+    @posts = @posts.tagged_with(params[:tag]) if params[:tag].present?
+    @posts = @posts.min_favorites(params[:min_favorites]) if params[:min_favorites].present?
+    @posts = @posts.order(created_at: :desc)
     respond_to do |format|
-      format.html do
-        @posts = Post.min_favorites(params[:min_favorites])
-      end
-      format.json do
-        @posts = Post.min_favorites(params[:min_favorites])
-      end
+      format.html
+      format.json
     end
   end
 
