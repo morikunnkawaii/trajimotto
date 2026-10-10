@@ -27,11 +27,11 @@
         </div>
         <h6>郵便番号</h6>
         <div class="field">
-          <%= text_field_tag :zipcode, nil, class: "form-control" %>
+          <%= text_field_tag :zipcode, nil, id:"zipcode", class: "form-control" %>
         </div>
         <h6>住所</h6>
         <div class="field">
-          <%= f.text_field :address, class: "form-control" %>
+          <%= f.text_field :address, id:"post_address", class: "form-control" %>
         </div>
         <%= f.submit '投稿', class: "btn btn-info text-white" %>
       <% end %>
