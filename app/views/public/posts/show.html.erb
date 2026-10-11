@@ -3,13 +3,18 @@
     <div class="col">
       <p>タイトル：<%= @post.title %></p>
       <%= image_tag @post.get_image(400,400) %>
-      <p>コメント：<%= @post.body %></p>
+      <p class="mt-2">コメント：<%= @post.body %></p>
       <p>
         <%= link_to user_path(@user) do %>
           <%= image_tag @post.user.get_profile_image(100,100) %>
         <% end %>
       </p>
-      <p>投稿者：<%= @post.user.name %></p>
+      <div class="tags mt-2">
+        <% @post.tag_list.each do |tag| %>
+          <%= link_to tag, posts_path(tag: tag), class: "badge bg-secondary text-decoration-none me-1" %>
+        <% end %>
+      </div>
+      <p class="mt-2">投稿者：<%= @post.user.name %></p>
       <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
       <% if @post.user == Current.user %>
         <%= link_to "投稿を削除", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger"  %>
@@ -21,7 +26,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <p>コメント件数：<%= @post.post_comments.count %></p>
+      <p class="mt-2">コメント件数：<%= @post.post_comments.count %></p>
       <% @post.post_comments.each do |post_comment| %>
         <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
         <%= post_comment.user.name %>
@@ -42,7 +47,7 @@
         </div>
         <%= f.submit "送信する" %>
       <% end %>
-      <%= render 'favorite', post: @post %>
+      <p class="mt-1"><%= render 'favorite', post: @post %></p>
       <%= @post.address %>
     </div>
   </div>

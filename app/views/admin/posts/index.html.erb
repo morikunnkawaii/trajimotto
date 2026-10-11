@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <% @posts.each do |post| %>
+        <p class="title"><%= post.title %></p>
+        <%= link_to post_path(post.id) do %>
+          <%= image_tag post.get_image(400,400) %>
+        <% end %>
+        <p class="body"><%= post.body %></p>
+        <%= post.address %>
+        <table class="table w-auto mx-auto">
+          <tr>
+            <td>
+              <%= link_to user_path(post.user_id) do %>
+                <%= image_tag post.user.get_profile_image(80,80) %>
+              <% end %>
+            </td>
+            <td class="align-middle"><%= post.user.name %></td>
+            <td>
+              <%= link_to "投稿を削除", admin_post_path(post), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger"  %>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

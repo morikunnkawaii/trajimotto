@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
 
+  acts_as_taggable_on :tags
+
   scope :min_favorites, ->(count) {where("favorites_count >= ?", count.to_i) if count.present? && count.to_i > 0}
 
   validates :title, presence: true
@@ -25,5 +27,4 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
-
 end

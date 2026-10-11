@@ -68,3 +68,5 @@ group :production do
 end
 
 gem 'geocoder'
+
+gem 'acts-as-taggable-on'

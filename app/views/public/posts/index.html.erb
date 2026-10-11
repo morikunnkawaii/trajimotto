@@ -8,7 +8,7 @@
 
           <%= select_tag :target, options_for_select([["ユーザー", "user"], ["投稿", "post"]], selected: params[:target]) %>
           <!-- select_tagでタグを作成。options_for_selectによりユーザーと投稿が表示。ユーザーを選ぶとuserが送られ、投稿を選ぶとpostが送られる。selectedは上のvalueのselectバージョン -->
-                  
+
           <%= f.submit "検索" %>
         <% end %>
       <% end %>
@@ -20,8 +20,11 @@
           <%= link_to "❤️ #{count}+", posts_path(min_favorites: count), class: "badge rounded-pill text-decoration-none #{active ? 'bg-danger text-white' : 'bg-light text-dark border'}" %>
         <% end %>
       </div>
+      <% if params[:tag].present? %>
+        <h2 class="mb-4">「<%= params[:tag] %>」の投稿一覧</h2>
+      <% end %>
       <% @posts.each do |post| %>
-        <div>
+        <div class="mb-3 p-3">
           <p class="title"><%= post.title %></p>
           <%= link_to post_path(post.id) do %>
             <%= image_tag post.get_image(400,400) %>
@@ -39,8 +42,13 @@
             </tr>
           </table>
           <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id), class: "btn btn-secondary" %></p>
+          <%= render 'favorite', post: post %>
+          <div class="tags mt-2">
+            <% post.tag_list.each do |tag| %>
+              <%= link_to tag, posts_path(tag: tag), class: "badge bg-secondary text-decoration-none me-1" %>
+            <% end %>
+          </div>
         </div>
-        <%= render 'favorite', post: post %>
       <% end %>
     </div>
   </div>

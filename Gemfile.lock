@@ -72,6 +72,9 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
+    acts-as-taggable-on (13.0.0)
+      activerecord (>= 7.1, < 8.2)
+      zeitwerk (>= 2.4, < 3.0)
     addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
@@ -403,6 +406,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  acts-as-taggable-on
   bcrypt (~> 3.1.7)
   bootsnap
   brakeman
@@ -442,6 +446,7 @@ CHECKSUMS
   activerecord (8.0.5.1) sha256=9252968fce404d75eb17092498a440d472167f2f8deee32b4658d6552b1eeea7
   activestorage (8.0.5.1) sha256=239742932b2fdcf0ead175e0889dbd385a36da2168fd7bde023aaad88ef745f2
   activesupport (8.0.5.1) sha256=329a4280c4fbcfcf338ae2cb9df28b0b14527929dba105e10b3604516d998710
+  acts-as-taggable-on (13.0.0) sha256=dca776c6ddebc458d175b57554ad692488e283f27047117e01ed871f1cba6135
   addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
