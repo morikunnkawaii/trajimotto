@@ -3,15 +3,13 @@
     <div class="col-12 text-center">
       <% @posts.each do |post| %>
         <p class="title"><%= post.title %></p>
-        <%= link_to post_path(post.id) do %>
-          <%= image_tag post.get_image(400,400) %>
-        <% end %>
+        <%= image_tag post.get_image(400,400) %>
         <p class="body"><%= post.body %></p>
         <%= post.address %>
         <table class="table w-auto mx-auto">
           <tr>
             <td>
-              <%= link_to user_path(post.user_id) do %>
+              <%= link_to admin_dashboard_path(post.user.id) do %>
                 <%= image_tag post.user.get_profile_image(80,80) %>
               <% end %>
             </td>
