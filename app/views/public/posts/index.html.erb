@@ -3,13 +3,15 @@
     <div class="col-12 text-center">
       <% if authenticated? %>
         <%= form_with url: searches_path, method: :get do |f| %>
-          <%= f.text_field :query, value: params[:query] %> 
-          <!-- value: params[:query]これをすることによって検索した後の記述が残る -->
+          <div class="mt-2">
+            <%= f.text_field :query, value: params[:query] %> 
+            <!-- value: params[:query]これをすることによって検索した後の記述が残る -->
 
-          <%= select_tag :target, options_for_select([["ユーザー", "user"], ["投稿", "post"]], selected: params[:target]) %>
-          <!-- select_tagでタグを作成。options_for_selectによりユーザーと投稿が表示。ユーザーを選ぶとuserが送られ、投稿を選ぶとpostが送られる。selectedは上のvalueのselectバージョン -->
+            <%= select_tag :target, options_for_select([["ユーザー", "user"], ["投稿", "post"]], selected: params[:target]) %>
+            <!-- select_tagでタグを作成。options_for_selectによりユーザーと投稿が表示。ユーザーを選ぶとuserが送られ、投稿を選ぶとpostが送られる。selectedは上のvalueのselectバージョン -->
 
-          <%= f.submit "検索" %>
+            <%= f.submit "検索" %>
+          </div>
         <% end %>
       <% end %>
       <div class="mb-4 d-flex gap-2 align-items-center flex-wrap">

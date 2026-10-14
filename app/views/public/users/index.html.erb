@@ -1,28 +1,46 @@
-<% if authenticated? %>
-  <%= form_with url: searches_path, method: :get do |f| %>
-    <%= f.text_field :query, value: params[:query] %> 
-    <!-- value: params[:query]これをすることによって検索した後の記述が残る -->
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <% if authenticated? %>
+        <%= form_with url: searches_path, method: :get do |f| %>
+          <div class="mt-2">
+            <%= f.text_field :query, value: params[:query] %> 
+            <!-- value: params[:query]これをすることによって検索した後の記述が残る -->
 
-    <%= select_tag :target, options_for_select([["ユーザー", "user"], ["投稿", "post"]], selected: params[:target]) %>
-    <!-- select_tagでタグを作成。options_for_selectによりユーザーと投稿が表示。ユーザーを選ぶとuserが送られ、投稿を選ぶとpostが送られる。selectedは上のvalueのselectバージョン -->
-            
-    <%= f.submit "検索" %>
-  <% end %>
-<% end %>
-<% @users.each do |user| %>
-  <p><%= user.name %></p>
-  <%= link_to user_path(user.id) do %>
-    <%= image_tag user.get_profile_image(100,100) %>
-  <% end %>
-  <p>
-    <%= link_to followers_user_path(user.id) do %>
-      フォロワー数：<%= user.followers.size %>
-    <% end %>
-  </p>
-  <p>
-    <%= link_to following_user_path(user.id) do %>
-      フォロー数：<%= user.following.size %>
-    <% end %>
-  </p>
-  <%= render "public/users/follow_button", user: user %>
-<% end %>
+            <%= select_tag :target, options_for_select([["ユーザー", "user"], ["投稿", "post"]], selected: params[:target]) %>
+            <!-- select_tagでタグを作成。options_for_selectによりユーザーと投稿が表示。ユーザーを選ぶとuserが送られ、投稿を選ぶとpostが送られる。selectedは上のvalueのselectバージョン -->
+                    
+            <%= f.submit "検索" %>
+          </div>
+        <% end %>
+      <% end %>
+      <table class="table mx-auto" style="width: auto;">
+        <% @users.each do |user| %>
+          <tr>
+            <td class="align-middle">
+              <%= link_to user_path(user.id) do %>
+                <%= image_tag user.get_profile_image(100,100), class: "rounded-circle shadow-sm", style: "width: 80px; height: 80px; object-fit: cover;" %>
+              <% end %>
+            </td>
+            <td class="align-middle text-left pl-3">
+              <%= user.name %>
+            </td>
+            <td class="align-middle">
+              <%= link_to followers_user_path(user.id) do %>
+                フォロワー数：<%= user.followers.size %>
+              <% end %>
+            </td>
+            <td class="align-middle">
+              <%= link_to following_user_path(user.id) do %>
+                フォロー数：<%= user.following.size %>
+              <% end %>
+            </td>
+            <td class="align-middle">
+              <%= render "public/users/follow_button", user: user %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,48 +1,79 @@
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col-12 text-center">
       <% if authenticated? %>
         <%= form_with url: searches_path, method: :get do |f| %>
-          <%= f.text_field :query, value: params[:query] %> 
-          <!-- value: params[:query]これをすることによって検索した後の記述が残る -->
+          <div class="mt-2">
+            <%= f.text_field :query, value: params[:query] %> 
+            <!-- value: params[:query]これをすることによって検索した後の記述が残る -->
 
-          <%= select_tag :target, options_for_select([["ユーザー", "user"], ["投稿", "post"]], selected: params[:target]) %>
-          <!-- select_tagでタグを作成。options_for_selectによりユーザーと投稿が表示。ユーザーを選ぶとuserが送られ、投稿を選ぶとpostが送られる。selectedは上のvalueのselectバージョン -->
-                  
-          <%= f.submit "検索" %>
+            <%= select_tag :target, options_for_select([["ユーザー", "user"], ["投稿", "post"]], selected: params[:target]) %>
+            <!-- select_tagでタグを作成。options_for_selectによりユーザーと投稿が表示。ユーザーを選ぶとuserが送られ、投稿を選ぶとpostが送られる。selectedは上のvalueのselectバージョン -->
+                    
+            <%= f.submit "検索" %>
+          </div>
         <% end %>
       <% end %>
-
-      <% if @message %>
-        <p><%= @message %></p>
-      <% end %>
-
-      <% @users.each do |user| %>
-        <p><%= user.name %></p>
-        <%= link_to user_path(user.id) do %>
-          <%= image_tag user.get_profile_image(100,100) %>
+      <div class="mt-1">
+        <% if @message %>
+          <p><%= @message %></p>
         <% end %>
-      <% end %>
-
-      <% @posts.each do |post| %>
-        <div class="field">
-          <p><%= post.title %></p>
-          <%= link_to post_path(post.id) do %>
-            <%= image_tag post.get_image(400,400) %>
-          <% end %>
-          <p><%= post.body %></p>
-          <table>
-            <tr>
-              <td>
-                <%= link_to user_path(post.user_id) do %>
-                  <%= image_tag post.user.get_profile_image(80,80) %>
-                <% end %>
-              </td>
-              <td><%= post.user.name %></td>
-            </tr>
-          </table>
-        </div>
-      <% end %>
+      </div>
+      <table class="table mx-auto" style="width: auto;">
+        <% @users.each do |user| %>
+          <tr>
+            <td class="align-middle">
+              <%= link_to user_path(user.id) do %>
+                <%= image_tag user.get_profile_image(100,100), class: "rounded-circle shadow-sm", style: "width: 80px; height: 80px; object-fit: cover;" %>
+              <% end %>
+            </td>
+            <td class="align-middle text-left pl-3">
+              <%= user.name %>
+            </td>
+            <td class="align-middle">
+              <%= link_to followers_user_path(user.id) do %>
+                フォロワー数：<%= user.followers.size %>
+              <% end %>
+            </td>
+            <td class="align-middle">
+              <%= link_to following_user_path(user.id) do %>
+                フォロー数：<%= user.following.size %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <table class="table mx-auto" style="width: auto;">
+        <% @posts.each do |post| %>
+          <tr>
+            <td class="align-middle">
+              <%= post.title %>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <%= link_to post_path(post.id) do %>
+                <%= image_tag post.get_image(400,400) %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <%= post.body %>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <%= link_to user_path(post.user_id) do %>
+                <%= image_tag post.user.get_profile_image(80,80) %>
+              <% end %>
+            </td>
+            <td class="align-middle text-left pl-3">
+              <%= post.user.name %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
     </div>
   </div>
 </div>

@@ -1,15 +1,29 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <% @users.each do |user| %>
-        <%= link_to user_path(user.id) do %>
-          <%= image_tag user.get_profile_image(100,100) %>
+    <div class="col-12 text-center">
+      <table class="table mx-auto" style="width: auto;">
+        <% @users.each do |user| %>
+          <tr>
+            <td class="align-middle">
+              <%= link_to user_path(user.id) do %>
+                <%= image_tag user.get_profile_image(100,100), class: "rounded-circle shadow-sm", style: "width: 80px; height: 80px; object-fit: cover;" %>
+              <% end %>
+            </td>
+            <td class="align-middle text-left pl-3">
+              <%= user.name %>
+            </td>
+            <td class="align-middle px-3">
+              フォロワー数：<%= user.followers.count %>
+            </td>
+            <td class="align-middle px-3">
+              フォロー数：<%= user.following.count %>
+            </td>
+            <td class="align-middle">
+              <%= render "public/users/follow_button", user: user %>
+            </td>
+          </tr>
         <% end %>
-        <%= user.name %>
-        <p>フォロワー数：<%= user.followers.count %></p>
-        <p>フォロー数：<%= user.following.count %></p>
-        <%= render "public/users/follow_button", user: user %>
-      <% end %>
+      </table>
     </div>
   </div>
 </div>
