@@ -12,7 +12,6 @@ Rails.application.routes.draw do
         get :following, :followers
       end
     end
-    resource :map, only: [:show]
     resources :relationships, only: [:create, :destroy]
     resource :session
     resources :passwords, param: :token
