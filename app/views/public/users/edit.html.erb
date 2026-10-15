@@ -29,7 +29,7 @@
           <%= f.submit "変更を保存", class: "btn btn-success" %>
         </div>
         <% if @user == Current.user %>
-          <p><%= link_to "退会する", user_path(@user), data: { turbo_method: :delete, turbo_confirm: "本当に退会しますか？" }, class: "btn btn-danger" %></p>
+          <p><%= link_to "退会する", user_path(@user), data: { turbo_method: :delete, turbo_confirm: "本当に退会しますか？退会すると二度とデータは戻りません！" }, class: "btn btn-danger" %></p>
         <% end %>
       <% end %>
     </div>

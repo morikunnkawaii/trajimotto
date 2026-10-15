@@ -1,12 +1,26 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h3><%= @user.name %></h3>
-      <%= image_tag @user.get_profile_image(100,100) %>
+      <table>
+        <tr>
+          <td style="padding-right: 15px;">
+            <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle shadow-sm", style: "width: 80px; height: 80px; object-fit: cover;" %>
+          </td>
+          <td>
+            <h4 class="mb-0"><%= @user.name %></h4>
+          </td>
+        </tr>
+      </table>
       <% if @user == Current.user %>
         <p class="field"><%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-outline-primary btn-sm" %></p>
       <% end %>
-      <%= render "public/users/follow_button", user: @user %>
+      <div class="mb-2">
+        <%= render "public/users/follow_button", user: @user %>
+      </div>
+      <div class="mb-2">
+        <%= link_to "フォローしている人", following_user_path(@user), class: "btn btn-outline-success btn-sm" %>
+        <%= link_to "フォローしてくれている人", followers_user_path(@user), class: "btn btn-outline-success btn-sm" %>
+      </div>
     </div>
   </div>
 </div>

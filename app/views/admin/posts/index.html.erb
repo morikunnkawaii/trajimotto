@@ -3,7 +3,7 @@
     <div class="col-12 text-center">
       <% @posts.each do |post| %>
         <p class="title"><%= post.title %></p>
-        <%= image_tag post.get_image(400,400) %>
+        <%= image_tag post.get_image(400,400), class: "img-fluid" %>
         <p class="body"><%= post.body %></p>
         <%= post.address %>
         <table class="table w-auto mx-auto">
