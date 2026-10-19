@@ -11,7 +11,7 @@
           </td>
         </tr>
       </table>
-      <% if @user == Current.user %>
+      <% if @user == Current.user && !@user.guest_user? %>
         <p class="field"><%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-outline-primary btn-sm" %></p>
       <% end %>
       <div class="mb-2">

@@ -14,12 +14,15 @@
   </div>
 
   <div class="row mt-3">
-    <div class="col-12 text-center">
+    <div class="d-flex justify-content-center align-items-center">
       <%= link_to new_user_path, class: "btn btn-outline-primary btn-sm me-2" do %>
         新規登録はこちら！
       <% end %>
-      <%= link_to new_session_path, class: "btn btn-outline-primary btn-sm" do %>
+      <%= link_to new_session_path, class: "btn btn-outline-primary btn-sm me-2" do %>
         登録済みの方はこちら！
+      <% end %>
+      <%= button_to guest_sign_in_path, class: "btn btn-outline-primary btn-sm", method: :post do %>
+        お試しで使ってみる！
       <% end %>
     </div>
   </div>

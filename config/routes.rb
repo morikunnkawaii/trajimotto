@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   #エンドユーザー
   scope module: :public do
     get "searches/index", to:"searches#index", as:"searches"
+    post "guest_sign_in", to: "guest_sessions#create", as: :guest_sign_in
     resources :posts do
       resource :favorite, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
@@ -19,7 +20,6 @@ Rails.application.routes.draw do
     get "homes/about", to:"homes#about", as:"about"
     get "favorites/index", to:"favorites#index", as:"favorites"
   end
-  post "guest_sign_in", to: "guest_sessions#create", as: :guest_sign_in
 
   #管理者
   namespace :admin do

@@ -2,6 +2,8 @@ class Public::UsersController < Public::ApplicationController
 
   allow_unauthenticated_access only: [:new, :create]
   before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :ensure_guest_user, only: [:edit]
+
 
   def new
     if authenticated?
@@ -71,5 +73,12 @@ class Public::UsersController < Public::ApplicationController
       redirect_to posts_path
     end
   end
+
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.guest_user?
+      redirect_to user_path(Current.user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    end
+  end  
 
 end
