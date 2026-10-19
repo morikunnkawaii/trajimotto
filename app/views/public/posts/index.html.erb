@@ -14,7 +14,7 @@
           </div>
         <% end %>
       <% end %>
-      <div class="mb-4 d-flex gap-2 align-items-center flex-wrap">
+      <div class="mb-4 mt-3 d-flex gap-2 align-items-center flex-wrap">
         <span class="text-muted small fw-bold me-1">いいね数で絞り込み:</span>
         <%= link_to "すべて", posts_path, class: "badge rounded-pill text-decoration-none #{params[:min_favorites].blank? ? 'bg-primary' : 'bg-light text-dark border'}" %>
         <% [1, 2, 3, 4].each do |count| %>
@@ -52,6 +52,7 @@
           </div>
         </div>
       <% end %>
+      <%= paginate @posts %>
     </div>
   </div>
 </div>

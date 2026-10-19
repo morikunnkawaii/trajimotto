@@ -21,6 +21,7 @@ class Public::PostsController < Public::ApplicationController
     @posts = @posts.tagged_with(params[:tag]) if params[:tag].present?
     @posts = @posts.min_favorites(params[:min_favorites]) if params[:min_favorites].present?
     @posts = @posts.order(created_at: :desc)
+    @posts = @posts.page(params[:page])
     respond_to do |format|
       format.html
       format.json

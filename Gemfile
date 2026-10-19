@@ -70,3 +70,5 @@ end
 gem 'geocoder'
 
 gem 'acts-as-taggable-on'
+
+gem 'kaminari','~> 1.2.1'

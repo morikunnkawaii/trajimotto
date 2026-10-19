@@ -24,11 +24,10 @@
     </div>
   </div>
 </div>
-
-<% @posts.each do |post| %>
-  <div class="container">
-    <div class="row">
-      <div class="col">
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <% @posts.each do |post| %>
         <%= link_to post_path(post.id) do %>
           <%= image_tag post.get_image(400,400) %>
         <% end %>
@@ -36,7 +35,8 @@
         <p>コメント：<%= post.body %></p>
         <p>ユーザーネーム：<%= post.user.name %></p>
         <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id), class: "btn btn-secondary " %></p>
-      </div>
+      <% end %>
+      <%= paginate @posts %>
     </div>
   </div>
-<% end %>
+</div>
