@@ -43,6 +43,7 @@
           </tr>
         <% end %>
       </table>
+      <%= paginate @users %>
       <table class="table mx-auto" style="width: auto;">
         <% @posts.each do |post| %>
           <tr>
@@ -74,6 +75,7 @@
           </tr>
         <% end %>
       </table>
+      <%= paginate @posts %>
     </div>
   </div>
 </div>

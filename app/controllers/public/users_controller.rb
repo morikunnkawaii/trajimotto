@@ -24,7 +24,7 @@ class Public::UsersController < Public::ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.page(params[:page])
   end
 
   def show
@@ -53,12 +53,12 @@ class Public::UsersController < Public::ApplicationController
 
   def following
     @user = User.find(params[:id])
-    @users = @user.following
+    @users = @user.following.page(params[:page])
   end
 
   def followers
     @user = User.find(params[:id])
-    @users = @user.followers
+    @users = @user.followers.page(params[:page])
   end
 
   private

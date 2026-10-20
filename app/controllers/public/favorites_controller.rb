@@ -14,7 +14,7 @@ class Public::FavoritesController < Public::ApplicationController
   end
 
   def index
-    @favorites = Current.user.favorites.includes(:post)
+    @favorites = Current.user.favorites.includes(:post).page(params[:page])
   end
 
 end

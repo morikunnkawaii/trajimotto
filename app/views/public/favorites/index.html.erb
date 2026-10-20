@@ -22,6 +22,7 @@
           </div>
           <%= render 'public/posts/favorite', post: favorite.post %>
       <% end %>
+      <%= paginate @favorites %>
     </div>
   </div>
 </div>
