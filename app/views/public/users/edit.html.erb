@@ -19,11 +19,15 @@
         </div>
         <label for="inputImage">ユーザーアイコン</label><br>
         <div class="field">
-          <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %><br>
+          <%= f.file_field :profile_image, id: "inputImage", placeholder: "プロフィール画像", accept: "image/*" %><br>
         </div>
         <label for="email">メールアドレス</label><br>
         <div class="field">
           <%= f.text_field :email_address, id:"email",placeholder:"Email_address" %><br>
+        </div>
+        <label for="profile">プロフィール</label><br>
+        <div class="field">
+          <%= f.text_area :profile, id:"profile",placeholder:"自己紹介", rows:3 %><br>
         </div>
         <div class="field">
           <%= f.submit "変更を保存", class: "btn btn-success" %>

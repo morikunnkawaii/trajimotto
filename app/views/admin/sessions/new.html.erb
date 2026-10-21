@@ -1,16 +1,21 @@
-<h2>管理者ログイン</h2>
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<div class="container mt-4" style="max-width: 400px;">
+  <h2 class="mb-3">管理者ログイン</h2>
 
-<%= form_with url: admin_session_path do |f| %>
-  <div>
-    <%= f.label :email_address, "メールアドレス" %>
-    <%= f.email_field :email_address, required: true, autofocus: true %>
-  </div>
+  <% if flash[:alert] %>
+    <div class="text-danger mb-3"><%= flash[:alert] %></div>
+  <% end %>
 
-  <div>
-    <%= f.label :password, "パスワード" %>
-    <%= f.password_field :password, required: true %>
-  </div>
+  <%= form_with url: admin_session_path do |f| %>
+    <div class="mb-3">
+      <%= f.label :email_address, "メールアドレス", class: "form-label" %>
+      <%= f.email_field :email_address, required: true, autofocus: true, class: "form-control" %>
+    </div>
 
-  <%= f.submit "ログイン" %>
-<% end %>
+    <div class="mb-3">
+      <%= f.label :password, "パスワード", class: "form-label" %>
+      <%= f.password_field :password, required: true, class: "form-control" %>
+    </div>
+
+    <%= f.submit "ログイン", class: "btn btn-primary" %>
+  <% end %>
+</div>

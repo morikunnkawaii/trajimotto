@@ -4,10 +4,15 @@
       <table>
         <tr>
           <td style="padding-right: 15px;">
-            <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle shadow-sm", style: "width: 80px; height: 80px; object-fit: cover;" %>
+            <%= image_tag @user.get_profile_image(80,80), class: "rounded-circle shadow-sm", style: "width: 80px; height: 80px; object-fit: cover;" %>
           </td>
           <td>
             <h4 class="mb-0"><%= @user.name %></h4>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="pt-3">
+            <%= @user.profile %>
           </td>
         </tr>
       </table>
@@ -29,7 +34,7 @@
     <div class="col">
       <% @posts.each do |post| %>
         <%= link_to post_path(post.id) do %>
-          <%= image_tag post.get_image(400,400) %>
+          <%= image_tag post.get_image(400,400), class: "img-fluid" %>
         <% end %>
         <p>タイトル：<%= post.title %></p>
         <p>コメント：<%= post.body %></p>

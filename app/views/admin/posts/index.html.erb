@@ -10,7 +10,7 @@
           <tr>
             <td>
               <%= link_to admin_dashboard_path(post.user.id) do %>
-                <%= image_tag post.user.get_profile_image(80,80) %>
+                <%= image_tag post.user.get_profile_image(80,80), class: "rounded-circle shadow-sm", style: "width: 80px; height: 80px; object-fit: cover;" %>
               <% end %>
             </td>
             <td class="align-middle"><%= post.user.name %></td>
