@@ -25,6 +25,18 @@ lucas = User.find_or_create_by!(email_address: "lucas@example.com") do |user|
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")
 end
 
+raia = User.find_or_create_by!(email_address: "raia@example.com") do |user|
+  user.name = "rais"
+  user.password = "password"
+  user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")
+end
+
+ab = User.find_or_create_by!(email_address: "ab@example.com") do |user|
+  user.name = "ab"
+  user.password = "password"
+  user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")
+end
+
 Post.find_or_create_by!(title: "夜の海") do |post_image|
   post_image.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
   post_image.body = "○○にある海です"
@@ -41,4 +53,16 @@ Post.find_or_create_by!(title: "桜") do |post_image|
   post_image.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")
   post_image.body= '○○にある桜です'
   post_image.user = lucas
+end
+
+Post.find_or_create_by!(title: "桜") do |post_image|
+  post_image.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")
+  post_image.body= '○○にある桜です'
+  post_image.user = raia
+end
+
+Post.find_or_create_by!(title: "桜") do |post_image|
+  post_image.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")
+  post_image.body= '○○にある桜です'
+  post_image.user = ab
 end

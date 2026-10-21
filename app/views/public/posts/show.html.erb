@@ -27,7 +27,7 @@
   <div class="row">
     <div class="col">
       <p class="mt-2">コメント件数：<%= @post.post_comments.count %></p>
-      <% @post.post_comments.each do |post_comment| %>
+      <% @post_comments.each do |post_comment| %>
         <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
         <%= post_comment.user.name %>
         <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
@@ -35,6 +35,7 @@
           <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
         <% end %>
       <% end %>
+      <%= paginate @post_comments %>
     </div>
   </div>
 </div>
